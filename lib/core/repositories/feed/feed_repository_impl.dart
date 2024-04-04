@@ -26,7 +26,6 @@ class FeedRepositoryImpl extends GetConnect implements FeedRepository {
   Future<(int, List<FeedSection>)> fetchFeed({int? page = 1}) async {
 
     final response = await get('/users/me/tasks', query: {'page': page.toString()});
-    
     final List<Task> results =
         (response.body['results'] as List<dynamic>).map((e) => Task.fromJson(e)).toList();
     final mapResult = Map<String, List<Task>>();
@@ -44,7 +43,7 @@ class FeedRepositoryImpl extends GetConnect implements FeedRepository {
     mapResult.forEach((key, value) {
       sections.add(FeedSection(date: key, tasks: value));
     });
-    final totalPages = ((response.body['total'] as int) / 30).ceil();
+    final totalPages = ((response.body['total'] as int) / 5).ceil();
     return (totalPages,sections);
   }
 }

@@ -8,6 +8,7 @@ class FeedController extends GetxController {
   final feed = <FeedSection>[].obs;
   final repo = Get.find<FeedRepository>();
   final loading = true.obs;
+  final isLoadingMore = false.obs;
   final canFetchMore = true.obs;
   int currentPage = 0;
 
@@ -25,7 +26,7 @@ class FeedController extends GetxController {
   fetchFeed() async {
     try {
       if (canFetchMore.value) {
-        loading.value = true;
+        isLoadingMore.value = true;
         currentPage++;
         final (totalPages, results) = await repo.fetchFeed(page: currentPage);
         canFetchMore.value = currentPage < totalPages;
@@ -40,10 +41,12 @@ class FeedController extends GetxController {
         });
         feed.addAll(results);
         loading.value = false;
+        isLoadingMore.value = false;
+
       }
     } catch (e) {
       Get.snackbar("Error", "An error has ocurred");
-      log(e.toString());
+      log(e.toString(), error: e);
     }
   }
 }
