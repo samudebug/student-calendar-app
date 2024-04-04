@@ -16,7 +16,7 @@ class MainPage extends StatelessWidget {
               appBar: DefaultAppBar(),
               floatingActionButtonLocation: ExpandableFab.location,
               floatingActionButton: controller.selectedPage.value == 1 ? ExpandableFab(
-                
+                key: controller.fabKey,
                 type: ExpandableFabType.up,
                 openButtonBuilder: DefaultFloatingActionButtonBuilder(
                   heroTag: null,
@@ -37,9 +37,9 @@ class MainPage extends StatelessWidget {
                 children: [
                   FloatingActionButton.extended(
                     heroTag: "Add_Class_Button",
-                    label: Text("Add Class"),
-                    icon: Icon(Icons.add),
-                    onPressed: () {},
+                    label: const Text("Add Class"),
+                    icon: const Icon(Icons.add),
+                    onPressed: () => controller.openAddClass(),
                   ),
                   FloatingActionButton.extended(
                     heroTag: "Join_Class_Button",

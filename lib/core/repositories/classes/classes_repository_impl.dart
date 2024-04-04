@@ -39,4 +39,14 @@ class ClassesRepositoryImpl extends GetConnect implements ClassesRepository {
     final Class result = Class.fromJson(response.body);
     return result;
   }
+
+  @override
+  Future<Class> createClass({required String name}) async {
+    final response = await post('/classes', {'name': name});
+    if (response.statusCode != 201) {
+      throw ("An error has ocurred while creating the class");
+    }
+    final Class result = Class.fromJson(response.body);
+    return result;
+  }
 }

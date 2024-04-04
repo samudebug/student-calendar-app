@@ -19,7 +19,9 @@ class ClassPage extends StatelessWidget {
               padding: const EdgeInsets.all(16.0),
               child: NotificationListener<ScrollNotification>(
                 onNotification: (scrollNotification) {
-                  if (scrollNotification is ScrollEndNotification && controller.canFetchMore.value && !controller.isLoadingMore.value) {
+                  if (scrollNotification is ScrollEndNotification &&
+                      controller.canFetchMore.value &&
+                      !controller.isLoadingMore.value) {
                     controller.fetchTasks();
                   }
                   return true;
@@ -37,12 +39,22 @@ class ClassPage extends StatelessWidget {
                       ),
                     ),
                   ),
+                  if (controller.tasks.isEmpty && !controller.loading.value)
+                    SliverToBoxAdapter(
+                      child: Container(
+                        height: 300,
+                        child: Center(
+                          child: Text("No tasks. All Clean!"),
+                        ),
+                      ),
+                    ),
                   SliverGrid(
                       delegate: SliverChildBuilderDelegate(
                         (BuildContext context, int index) {
                           return GestureDetector(
                               onTap: () => {},
-                              child: TaskElement(task: controller.tasks[index]));
+                              child:
+                                  TaskElement(task: controller.tasks[index]));
                         },
                         childCount: controller.tasks.length,
                       ),
