@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:student_calendar_app/core/models/models.dart';
 import 'package:student_calendar_app/core/repositories/classes/classes_repository.dart';
 import 'package:student_calendar_app/core/repositories/tasks/tasks_repository.dart';
+import 'package:flutter/services.dart';
 
 class ClassPageController extends GetxController {
   final repo = Get.find<ClassesRepository>();
@@ -43,5 +44,10 @@ class ClassPageController extends GetxController {
       Get.snackbar("Error", "An error has ocurred");
       log(e.toString(), error: e);
     }
+  }
+
+  copyCode() async {
+    await Clipboard.setData(ClipboardData(text: currentClass.value!.code));
+    Get.snackbar("Copied!", "The code has been copied to your clipboard");
   }
 }

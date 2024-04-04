@@ -16,6 +16,14 @@ class ClassesController extends GetxController {
     fetchClasses();
   }
 
+  refresh() async {
+    loading.value = true;
+    canFetchMore.value = true;
+    currentPage = 0;
+    classes.clear();
+    await fetchClasses();
+  }
+
   fetchClasses() async {
     try {
       if (canFetchMore.value) {

@@ -12,6 +12,8 @@ import 'package:student_calendar_app/pages/profile/profile_binding.dart';
 import 'package:student_calendar_app/pages/profile/profile_view.dart';
 import 'package:student_calendar_app/pages/signup/signup_binding.dart';
 import 'package:student_calendar_app/pages/signup/signup_view.dart';
+import 'package:student_calendar_app/pages/task/task_binding.dart';
+import 'package:student_calendar_app/pages/task/task_view.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -59,7 +61,13 @@ class MyApp extends StatelessWidget {
             name: '/classes/:classId',
             page: () => ClassPage(),
             binding: ClassPageBinding(),
-            transition: Transition.cupertino)
+            transition: Transition.cupertino),
+        GetPage(
+            name: '/classes/:classId/tasks/:taskId',
+            page: () => TaskPage(),
+            binding: TaskPageBinding(),
+            fullscreenDialog: true,
+            transition: Transition.downToUp)
       ],
     );
   }

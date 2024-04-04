@@ -28,7 +28,6 @@ class FeedView extends StatelessWidget {
                 child: RefreshIndicator(
                   onRefresh: () async => controller.refresh(),
                   child: CustomScrollView(
-                    
                     slivers: controller.feed
                         .mapIndexed((sectionIndex, element) {
                           return [

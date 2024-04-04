@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:get/get.dart';
 import 'package:student_calendar_app/core/environment.dart';
 import 'package:student_calendar_app/core/models/paginated_result.dart';
@@ -34,5 +36,20 @@ class TasksRepositoryImpl extends GetConnect implements TasksRepository {
         total: response.body['total'],
         page: int.parse(response.body['page']),
         results: classes);
+  }
+
+  @override
+  Future<Task> getTask({required String classId, required String taskId}) async {
+    final response = await get('/classes/$classId/tasks/$taskId');
+    if (response.statusCode == 404) {
+      throw ("Task not found");
+    }
+    if (response.statusCode != 200) {
+      log("Status Code: ${response.statusCode}", name: "TasksRepository");
+      log("Body: ${response.body}", name: "TasksRepository");
+      throw ("An error has ocurred");
+    }
+    final result = Task.fromJson(response.body);
+    return result;
   }
 }

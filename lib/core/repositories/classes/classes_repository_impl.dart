@@ -49,4 +49,20 @@ class ClassesRepositoryImpl extends GetConnect implements ClassesRepository {
     final Class result = Class.fromJson(response.body);
     return result;
   }
+
+  @override
+  Future<Class> joinClass({required String code}) async {
+    final response = await get('/classes/invite/$code');
+    if (response.statusCode == 404) {
+      throw ("This class does not exist");
+
+    }
+    if (response.statusCode != 200) {
+      log("Error code: ${response.statusCode}");
+      log("Error message: ${response.body}");
+      throw ("An error has ocurred while joining the class");
+    }
+    final Class result = Class.fromJson(response.body);
+    return result;
+  }
 }

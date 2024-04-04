@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_expandable_fab/flutter_expandable_fab.dart';
 import 'package:get/get.dart';
 import 'package:student_calendar_app/widgets/create_class/create_class_view.dart';
-
+import 'package:student_calendar_app/widgets/join_class/join_class_view.dart';
 
 class MainPageController extends GetxController {
   final selectedPage = 0.obs;
@@ -14,6 +14,13 @@ class MainPageController extends GetxController {
 
   openAddClass() {
     fabKey.currentState?.toggle();
-    Get.bottomSheet(CreateClassDialog(), backgroundColor: Get.theme.colorScheme.background);
+    Get.bottomSheet(CreateClassDialog(),
+        backgroundColor: Get.theme.colorScheme.background);
+  }
+
+  openJoinClass() {
+    fabKey.currentState?.toggle();
+    Get.bottomSheet(JoinClassDialog(),
+        backgroundColor: Get.theme.colorScheme.background);
   }
 }

@@ -39,6 +39,31 @@ class ClassPage extends StatelessWidget {
                       ),
                     ),
                   ),
+                  SliverToBoxAdapter(
+                    child: Container(
+                      alignment: Alignment.centerRight,
+                      height: 50,
+                      padding: EdgeInsets.symmetric(vertical: 8),
+                      child: TextButton.icon(onPressed: () {}, icon: Icon(Icons.people), label: Text("View Students")),
+                    ),
+                  ),
+                  SliverToBoxAdapter(
+                    child: Container(
+                      alignment: Alignment.center,
+                      height: 100,
+                      padding: EdgeInsets.symmetric(vertical: 8),
+                      child: Wrap(
+                        spacing: 4,
+                        direction: Axis.horizontal,
+                        crossAxisAlignment: WrapCrossAlignment.center,
+                        children: [
+                          Text("Add students to the class with the code:"),
+                          Text(controller.currentClass.value!.code),
+                          IconButton(onPressed: () => controller.copyCode(), icon: Icon(Icons.copy))
+                        ],
+                      ),
+                    ),
+                  ),
                   if (controller.tasks.isEmpty && !controller.loading.value)
                     SliverToBoxAdapter(
                       child: Container(
@@ -51,10 +76,7 @@ class ClassPage extends StatelessWidget {
                   SliverGrid(
                       delegate: SliverChildBuilderDelegate(
                         (BuildContext context, int index) {
-                          return GestureDetector(
-                              onTap: () => {},
-                              child:
-                                  TaskElement(task: controller.tasks[index]));
+                          return TaskElement(task: controller.tasks[index]);
                         },
                         childCount: controller.tasks.length,
                       ),

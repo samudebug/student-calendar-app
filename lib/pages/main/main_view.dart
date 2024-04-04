@@ -45,7 +45,7 @@ class MainPage extends StatelessWidget {
                     heroTag: "Join_Class_Button",
                     label: Text("Join Class"),
                     icon: Icon(Icons.person_add),
-                    onPressed: () {},
+                    onPressed: () => controller.openJoinClass(),
                   )
                 ],
               ) : null,
