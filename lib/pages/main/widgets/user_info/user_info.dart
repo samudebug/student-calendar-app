@@ -10,7 +10,7 @@ class UserInfo extends StatelessWidget {
     return Obx(() => GestureDetector(
           onTap: () => controller.openProfile(),
           child: CircleAvatar(
-            backgroundColor: Theme.of(context).colorScheme.primary,
+            backgroundColor: Get.theme.colorScheme.primary,
             backgroundImage: controller.imgUrl.value.isEmpty
                 ? null
                 : NetworkImage(controller.imgUrl.value),

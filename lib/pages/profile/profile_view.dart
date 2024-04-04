@@ -24,7 +24,7 @@ class ProfilePage extends StatelessWidget {
               padding: EdgeInsets.all(16),
               child: Center(
                 child: Obx(() => CircleAvatar(
-                      backgroundColor: Theme.of(context).colorScheme.primary,
+                      backgroundColor: context.theme.colorScheme.primary,
                       radius: 40,
                       backgroundImage: controller.imgUrl.value.isEmpty
                           ? null
@@ -39,14 +39,14 @@ class ProfilePage extends StatelessWidget {
               padding: EdgeInsets.symmetric(vertical: 16),
               child: Obx(() => Text(
                     controller.userName.value,
-                    style: Theme.of(context).textTheme.displayLarge,
+                    style: context.theme.textTheme.displayLarge,
                   )),
             ),
             Padding(
               padding: EdgeInsets.symmetric(vertical: 16),
               child: Obx(() => Text(
                     controller.email.value,
-                    style: Theme.of(context).textTheme.titleMedium,
+                    style: context.theme.textTheme.titleMedium,
                   )),
             ),
             Padding(
@@ -55,8 +55,8 @@ class ProfilePage extends StatelessWidget {
                 child: Text("Logout"),
                 onPressed: () => controller.signOut(),
                 style: ElevatedButton.styleFrom(
-                    backgroundColor: Theme.of(context).colorScheme.error,
-                    foregroundColor: Theme.of(context).colorScheme.onError),
+                    backgroundColor: context.theme.colorScheme.error,
+                    foregroundColor: context.theme.colorScheme.onError),
               ),
             ),
           ],

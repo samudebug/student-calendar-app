@@ -11,10 +11,17 @@ class FeedController extends GetxController {
   final canFetchMore = true.obs;
   int currentPage = 0;
 
-
   FeedController() {
     fetchFeed();
   }
+  refresh() async {
+    loading.value = true;
+    canFetchMore.value = true;
+    currentPage = 0;
+    feed.clear();
+    await fetchFeed();
+  }
+
   fetchFeed() async {
     try {
       if (canFetchMore.value) {
@@ -22,9 +29,17 @@ class FeedController extends GetxController {
         currentPage++;
         final (totalPages, results) = await repo.fetchFeed(page: currentPage);
         canFetchMore.value = currentPage < totalPages;
+        // merging results
+        feed.forEach((element) {
+          final elementInResult =
+              results.firstWhereOrNull((e) => e.date == element.date);
+          if (elementInResult != null) {
+            element.tasks.addAll(elementInResult.tasks);
+            results.removeWhere((e) => e.date == element.date);
+          }
+        });
         feed.addAll(results);
         loading.value = false;
-
       }
     } catch (e) {
       Get.snackbar("Error", "An error has ocurred");

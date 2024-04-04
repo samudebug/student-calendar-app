@@ -21,7 +21,7 @@ class LoginPage extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(vertical: 8),
                   child: Text(
                     "Login",
-                    style: Theme.of(context).textTheme.displayLarge,
+                    style: Get.theme.textTheme.displayLarge,
                     textAlign: TextAlign.center,
                   ),
                 ),
@@ -49,8 +49,8 @@ class LoginPage extends StatelessWidget {
                       onPressed: () {},
                       child: Text(
                         "Forgot Password",
-                        style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                            color: Theme.of(context).colorScheme.primary),
+                        style: Get.theme.textTheme.labelSmall?.copyWith(
+                            color: Get.theme.colorScheme.primary),
                       )),
                 ),
                 Padding(
@@ -58,8 +58,8 @@ class LoginPage extends StatelessWidget {
                   child: ElevatedButton(
                     onPressed: () => controller.submit(),
                     style: ElevatedButton.styleFrom(
-                        backgroundColor: Theme.of(context).colorScheme.primary,
-                        foregroundColor: Theme.of(context).colorScheme.onPrimary),
+                        backgroundColor: Get.theme.colorScheme.primary,
+                        foregroundColor: Get.theme.colorScheme.onPrimary),
                     child: const Text("Login"),
                   ),
                 ),
@@ -68,8 +68,8 @@ class LoginPage extends StatelessWidget {
                   child: ElevatedButton(
                     onPressed: () => controller.loginWithGoogle(),
                     style: ElevatedButton.styleFrom(
-                        backgroundColor: Theme.of(context).colorScheme.tertiary,
-                        foregroundColor: Theme.of(context).colorScheme.onTertiary),
+                        backgroundColor: Get.theme.colorScheme.tertiary,
+                        foregroundColor: Get.theme.colorScheme.onTertiary),
                     child: const Text("Login With Google"),
                   ),
                 ),
@@ -82,8 +82,8 @@ class LoginPage extends StatelessWidget {
                   child: ElevatedButton(
                     onPressed: () => controller.openSignup(),
                     style: ElevatedButton.styleFrom(
-                        backgroundColor: Theme.of(context).colorScheme.secondary,
-                        foregroundColor: Theme.of(context).colorScheme.onSecondary),
+                        backgroundColor: Get.theme.colorScheme.secondary,
+                        foregroundColor: Get.theme.colorScheme.onSecondary),
                     child: const Text("Sign Up"),
                   ),
                 ),

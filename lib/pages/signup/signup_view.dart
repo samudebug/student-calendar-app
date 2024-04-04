@@ -21,7 +21,7 @@ class SignUpPage extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(vertical: 8),
                   child: Text(
                     "Signup",
-                    style: Theme.of(context).textTheme.displayLarge,
+                    style: Get.theme.textTheme.displayLarge,
                     textAlign: TextAlign.center,
                   ),
                 ),
@@ -66,8 +66,8 @@ class SignUpPage extends StatelessWidget {
                   child: ElevatedButton(
                     onPressed: () => controller.submit(),
                     style: ElevatedButton.styleFrom(
-                        backgroundColor: Theme.of(context).colorScheme.primary,
-                        foregroundColor: Theme.of(context).colorScheme.onPrimary),
+                        backgroundColor: Get.theme.colorScheme.primary,
+                        foregroundColor: Get.theme.colorScheme.onPrimary),
                     child: const Text("Signup"),
                   ),
                 ),
