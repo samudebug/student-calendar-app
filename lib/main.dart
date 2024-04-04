@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:student_calendar_app/core/core.dart';
+import 'package:student_calendar_app/pages/class/class_binding.dart';
+import 'package:student_calendar_app/pages/class/class_view.dart';
 import 'package:student_calendar_app/pages/login/login_binding.dart';
 import 'package:student_calendar_app/pages/login/login_view.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -52,8 +54,12 @@ class MyApp extends StatelessWidget {
             name: '/profile',
             page: () => ProfilePage(),
             binding: ProfilePageBinding(),
-            transition: Transition.cupertino
-            )
+            transition: Transition.cupertino),
+        GetPage(
+            name: '/classes/:classId',
+            page: () => ClassPage(),
+            binding: ClassPageBinding(),
+            transition: Transition.cupertino)
       ],
     );
   }

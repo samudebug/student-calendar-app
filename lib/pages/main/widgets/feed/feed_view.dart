@@ -28,25 +28,18 @@ class FeedView extends StatelessWidget {
                 child: RefreshIndicator(
                   onRefresh: () async => controller.refresh(),
                   child: CustomScrollView(
+                    
                     slivers: controller.feed
                         .mapIndexed((sectionIndex, element) {
-                          if (sectionIndex == controller.feed.length) {
-                            return [
-                              const Center(
-                                  child: Padding(
-                                padding: EdgeInsets.all(8),
-                                child: CircularProgressIndicator(),
-                              ))
-                            ];
-                          }
                           return [
                             SliverToBoxAdapter(
                               child: Container(
                                 alignment: Alignment.centerLeft,
                                 height: 100,
+                                padding: EdgeInsets.symmetric(vertical: 8),
                                 child: Text(
                                   element.date,
-                                  style: context.theme.textTheme.displayMedium
+                                  style: context.theme.textTheme.displaySmall
                                       ?.copyWith(
                                           color: context
                                               .theme.colorScheme.onBackground),
@@ -64,13 +57,14 @@ class FeedView extends StatelessWidget {
                                 gridDelegate:
                                     const SliverGridDelegateWithMaxCrossAxisExtent(
                                         maxCrossAxisExtent: 400.0,
-                                        mainAxisSpacing: 10.0,
-                                        crossAxisSpacing: 10.0,
+                                        mainAxisSpacing: 16.0,
+                                        crossAxisSpacing: 16.0,
                                         mainAxisExtent: 150)),
                             SliverToBoxAdapter(
                               child: Container(
                                 alignment: Alignment.center,
-                                height: controller.isLoadingMore.value ? 100 : 16,
+                                height:
+                                    controller.isLoadingMore.value ? 100 : 0,
                                 child: controller.isLoadingMore.value
                                     ? const CircularProgressIndicator()
                                     : Container(),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:student_calendar_app/pages/main/widgets/user_info/user_info_controller.dart';
+import 'package:student_calendar_app/widgets/user_info/user_info_controller.dart';
 
 class UserInfo extends StatelessWidget {
   UserInfo({super.key});

@@ -8,4 +8,7 @@ class MainPageController extends GetxController {
     selectedPage.value = index;
   }
 
+  openAddClass() {
+    
+  }
 }

@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
@@ -24,10 +22,15 @@ class FeedRepositoryImpl extends GetConnect implements FeedRepository {
 
   @override
   Future<(int, List<FeedSection>)> fetchFeed({int? page = 1}) async {
-
-    final response = await get('/users/me/tasks', query: {'page': page.toString()});
-    final List<Task> results =
-        (response.body['results'] as List<dynamic>).map((e) => Task.fromJson(e)).toList();
+    final afterDate = DateTime.now().copyWith(hour: 0, minute: 0);
+    
+    final response = await get('/users/me/tasks', query: {
+      'page': page.toString(),
+      'afterDate': "${afterDate.toIso8601String()}Z"
+    });
+    final List<Task> results = (response.body['results'] as List<dynamic>)
+        .map((e) => Task.fromJson(e))
+        .toList();
     final mapResult = Map<String, List<Task>>();
     results.forEach((Task e) {
       String key = DateFormat('EEEE, MMM d').format(e.deliverDate);
@@ -43,7 +46,7 @@ class FeedRepositoryImpl extends GetConnect implements FeedRepository {
     mapResult.forEach((key, value) {
       sections.add(FeedSection(date: key, tasks: value));
     });
-    final totalPages = ((response.body['total'] as int) / 5).ceil();
-    return (totalPages,sections);
+    final totalPages = ((response.body['total'] as int) / 30).ceil();
+    return (totalPages, sections);
   }
 }
