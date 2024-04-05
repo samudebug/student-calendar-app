@@ -19,6 +19,7 @@ class ClassesRepositoryImpl extends GetConnect implements ClassesRepository {
       request.headers['Authorization'] = token;
       return request;
     });
+    httpClient.timeout = Duration(seconds: 30);
   }
 
   @override
@@ -36,6 +37,11 @@ class ClassesRepositoryImpl extends GetConnect implements ClassesRepository {
   @override
   Future<Class> getClass({required String id}) async {
     final response = await get('/classes/$id');
+    if (response.statusCode != 200) {
+      log("Response code ${response.statusCode}", name: "ClassesRepository");
+      log("Response body: ${response.body}", name: "ClassesRepository");
+      throw ("An error has ocurred");
+    }
     final Class result = Class.fromJson(response.body);
     return result;
   }
@@ -55,7 +61,6 @@ class ClassesRepositoryImpl extends GetConnect implements ClassesRepository {
     final response = await get('/classes/invite/$code');
     if (response.statusCode == 404) {
       throw ("This class does not exist");
-
     }
     if (response.statusCode != 200) {
       log("Error code: ${response.statusCode}");

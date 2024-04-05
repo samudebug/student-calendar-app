@@ -4,11 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:student_calendar_app/core/models/models.dart';
 import 'package:student_calendar_app/core/repositories/tasks/tasks_repository.dart';
+import 'package:student_calendar_app/core/services/auth_service.dart';
 
 class TaskPageController extends GetxController {
   final repo = Get.find<TasksRepository>();
+  final authService = Get.find<AuthService>();
   final currentTask = Rx<Task?>(null);
   final loading = true.obs;
+  final canEdit = false.obs;
   final colors = <String, Color>{
     'green': Colors.green,
     'red': Colors.red,
@@ -44,11 +47,19 @@ class TaskPageController extends GetxController {
     if (taskId == null) return;
     try {
       currentTask.value = await repo.getTask(classId: classId, taskId: taskId);
+      canEdit.value =
+          currentTask.value!.student?.userId == authService.user?.uid;
     } catch (e) {
       Get.snackbar("Error", e.toString(),
           backgroundColor: Get.theme.colorScheme.error);
     } finally {
       loading.value = false;
     }
+  }
+
+  openEdit() async {
+    await Get.toNamed(
+        '/classes/${currentTask.value!.classId}/tasks/${currentTask.value!.id}/edit');
+    fetchData();
   }
 }

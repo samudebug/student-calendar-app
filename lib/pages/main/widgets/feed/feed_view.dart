@@ -58,7 +58,7 @@ class FeedView extends StatelessWidget {
                                         maxCrossAxisExtent: 400.0,
                                         mainAxisSpacing: 16.0,
                                         crossAxisSpacing: 16.0,
-                                        mainAxisExtent: 150)),
+                                        mainAxisExtent: 170)),
                             SliverToBoxAdapter(
                               child: Container(
                                 alignment: Alignment.center,

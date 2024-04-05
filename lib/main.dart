@@ -14,6 +14,8 @@ import 'package:student_calendar_app/pages/signup/signup_binding.dart';
 import 'package:student_calendar_app/pages/signup/signup_view.dart';
 import 'package:student_calendar_app/pages/task/task_binding.dart';
 import 'package:student_calendar_app/pages/task/task_view.dart';
+import 'package:student_calendar_app/pages/task_form/task_form_binding.dart';
+import 'package:student_calendar_app/pages/task_form/task_form_view.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -61,13 +63,26 @@ class MyApp extends StatelessWidget {
             name: '/classes/:classId',
             page: () => ClassPage(),
             binding: ClassPageBinding(),
+            preventDuplicates: true,
             transition: Transition.cupertino),
+        GetPage(
+            name: '/classes/:classId/tasks/new',
+            page: () => TaskForm(),
+            binding: TaskFormBinding(),
+            fullscreenDialog: true,
+            transition: Transition.downToUp),
         GetPage(
             name: '/classes/:classId/tasks/:taskId',
             page: () => TaskPage(),
             binding: TaskPageBinding(),
             fullscreenDialog: true,
-            transition: Transition.downToUp)
+            transition: Transition.downToUp),
+        GetPage(
+            name: '/classes/:classId/tasks/:taskId/edit',
+            page: () => TaskForm(),
+            binding: TaskFormBinding(),
+            fullscreenDialog: true,
+            transition: Transition.cupertino)
       ],
     );
   }

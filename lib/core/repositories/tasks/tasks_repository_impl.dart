@@ -19,6 +19,7 @@ class TasksRepositoryImpl extends GetConnect implements TasksRepository {
       request.headers['Authorization'] = token;
       return request;
     });
+    httpClient.timeout = Duration(seconds: 30);
   }
 
   @override
@@ -39,7 +40,8 @@ class TasksRepositoryImpl extends GetConnect implements TasksRepository {
   }
 
   @override
-  Future<Task> getTask({required String classId, required String taskId}) async {
+  Future<Task> getTask(
+      {required String classId, required String taskId}) async {
     final response = await get('/classes/$classId/tasks/$taskId');
     if (response.statusCode == 404) {
       throw ("Task not found");
@@ -51,5 +53,54 @@ class TasksRepositoryImpl extends GetConnect implements TasksRepository {
     }
     final result = Task.fromJson(response.body);
     return result;
+  }
+
+  @override
+  Future<Task> createTask(
+      {required String classId,
+      required String name,
+      required DateTime deliverDate,
+      required String notes}) async {
+    final response = await post('/classes/$classId/tasks', {
+      'name': name,
+      'deliverDate': "${deliverDate.toIso8601String()}Z",
+      'notes': notes
+    });
+    if (response.statusCode != 201) {
+      throw ("An error has ocurred while creating the task");
+    }
+    final Task result = Task.fromJson(response.body);
+    return result;
+  }
+
+  @override
+  Future<Task> updateTask(
+      {required String classId,
+      required String taskId,
+      String? name,
+      DateTime? deliverDate,
+      String? notes}) async {
+    final body = <String, dynamic>{};
+    if (name != null) {
+      body['name'] = name;
+    }
+    if (deliverDate != null) {
+      body['deliverDate'] = "${deliverDate.toIso8601String()}Z";
+    }
+    if (name != null) {
+      body['notes'] = notes;
+    }
+    final response = await patch('/classes/$classId/tasks/$taskId', body);
+    if (response.statusCode != 200) {
+      throw ("An error has ocurred while updating the task");
+    }
+    final Task result = Task.fromJson(response.body);
+    return result;
+  }
+
+  @override
+  Future<void> deleteTask(
+      {required String classId, required String taskId}) async {
+    await delete('/classes/$classId/tasks/$taskId');
   }
 }

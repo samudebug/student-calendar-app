@@ -62,6 +62,18 @@ class TaskElement extends StatelessWidget {
                   child: CreatedByInfo(
                     student: task.student!,
                   ),
+                ),
+              if (task.currentClass != null)
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  child: Wrap(
+                    spacing: 8,
+                    direction: Axis.horizontal,
+                    children: [
+                      const Text("Class:"),
+                      Text(task.currentClass!.name),
+                    ],
+                  ),
                 )
             ],
           ),

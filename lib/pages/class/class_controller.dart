@@ -27,13 +27,21 @@ class ClassPageController extends GetxController {
     await fetchTasks();
   }
 
+  refresh() {
+    loading.value = true;
+    canFetchMore.value = true;
+    currentPage = 0;
+    tasks.clear();
+    fetchTasks();
+  }
+
   fetchTasks() async {
     try {
       if (canFetchMore.value) {
         isLoadingMore.value = true;
         currentPage++;
-        final results =
-            await tasksRepo.getTasksByClassId(classId: currentClass.value!.id, page: currentPage);
+        final results = await tasksRepo.getTasksByClassId(
+            classId: currentClass.value!.id, page: currentPage);
         final totalPages = (results.total / 30).ceil();
         canFetchMore.value = currentPage < totalPages;
         tasks.addAll(results.results);
@@ -49,5 +57,10 @@ class ClassPageController extends GetxController {
   copyCode() async {
     await Clipboard.setData(ClipboardData(text: currentClass.value!.code));
     Get.snackbar("Copied!", "The code has been copied to your clipboard");
+  }
+
+  openAdd() async {
+    await Get.toNamed('/classes/${currentClass.value!.id}/tasks/new');
+    refresh();
   }
 }

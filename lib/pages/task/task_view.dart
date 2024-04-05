@@ -21,6 +21,13 @@ class TaskPage extends StatelessWidget {
             child: Scaffold(
               backgroundColor: controller.currentColorScheme.value.background,
               appBar: AppBar(),
+              floatingActionButton: controller.canEdit.value
+                  ? FloatingActionButton.extended(
+                      onPressed: () => controller.openEdit(),
+                      label: Text("Edit Task"),
+                      icon: Icon(Icons.edit),
+                    )
+                  : null,
               body: Obx(() => controller.loading.value &&
                       controller.currentTask.value == null
                   ? const Center(

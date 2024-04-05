@@ -18,6 +18,7 @@ class FeedRepositoryImpl extends GetConnect implements FeedRepository {
       return request;
     });
     httpClient.maxAuthRetries = 3;
+    httpClient.timeout = Duration(seconds: 30);
   }
 
   @override
