@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:get/get.dart';
 import 'package:student_calendar_app/core/repositories/auth/auth_repository.dart';
 
