@@ -16,7 +16,7 @@ class AuthService extends GetxService {
       {required String name,
       required String email,
       required String password}) async {
-    repo.signUp(name: name, email: email, password: password);
+    return repo.signUp(name: name, email: email, password: password);
   }
 
   signOut() {

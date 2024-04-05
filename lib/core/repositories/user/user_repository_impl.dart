@@ -22,8 +22,6 @@ class UserRepositoryImpl extends GetConnect implements UserRepository {
 
   @override
   Future<void> updateUser({required String fcmToken, required String name}) async {
-    final response = await patch('/users/me', {'fcmToken': fcmToken, 'name': name});
-    log("Response code ${response.statusCode}");
-    log("Response body ${response.body}");
+    await patch('/users/me', {'fcmToken': fcmToken, 'name': name});
   }
 }

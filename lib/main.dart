@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:student_calendar_app/core/core.dart';
+import 'package:student_calendar_app/core/services/auth_service.dart';
 import 'package:student_calendar_app/pages/class/class_binding.dart';
 import 'package:student_calendar_app/pages/class/class_view.dart';
 import 'package:student_calendar_app/pages/login/login_binding.dart';
@@ -80,6 +81,10 @@ class MyApp extends StatelessWidget {
         brightness: Brightness.dark,
       ),
       initialRoute: '/',
+      onInit: () {
+        Get.find<AuthService>().checkUserLoggedIn();
+      },
+
       getPages: [
         GetPage(
             name: '/login',
@@ -89,7 +94,7 @@ class MyApp extends StatelessWidget {
             name: '/signup',
             page: () => SignUpPage(),
             binding: SignupBinding()),
-        GetPage(name: '/', page: () => MainPage(), binding: MainPageBinding()),
+        GetPage(name: '/', page: () => MainPage(), binding: MainPageBinding(), ),
         GetPage(
             name: '/notifications',
             page: () => NotificationsPage(),

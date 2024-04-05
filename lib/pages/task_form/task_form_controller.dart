@@ -30,17 +30,18 @@ class TaskFormController extends GetxController {
             taskId: currentTask.value!.id,
             name: nameController.text,
             deliverDate:
-                DateFormat('dd/MM/yyyy').parse(deliverDateController.text),
+                DateFormat('dd/MM/yyyy').parse(deliverDateController.text).copyWith(hour: 8, minute: 0, second: 0, millisecond: 0),
             notes: notesController.text);
       } else {
         await repo.createTask(
             classId: classId.value,
             name: nameController.text,
             deliverDate:
-                DateFormat('dd/MM/yyyy').parse(deliverDateController.text),
+                DateFormat('dd/MM/yyyy').parse(deliverDateController.text).copyWith(hour: 8, minute: 0, second: 0, millisecond: 0),
             notes: notesController.text);
       }
-      Get.back(closeOverlays: false);
+      Get.offNamedUntil('/classes/${classId.value}',
+          (route) => !(route.settings.name?.contains('classes') ?? true));
       Get.snackbar("Saved!", "The task was saved successfully!");
     }
   }
@@ -70,7 +71,7 @@ class TaskFormController extends GetxController {
         onConfirm: () async {
           await repo.deleteTask(
               classId: classId.value, taskId: currentTask.value!.id);
-          log("Class Id ${classId.value}");
+
           Get.offNamedUntil('/classes/${classId.value}',
               (route) => !(route.settings.name?.contains('tasks') ?? true));
         });

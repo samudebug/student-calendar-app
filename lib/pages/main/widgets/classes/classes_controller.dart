@@ -3,13 +3,19 @@ import 'dart:developer';
 import 'package:get/get.dart';
 import 'package:student_calendar_app/core/models/models.dart';
 import 'package:student_calendar_app/core/repositories/classes/classes_repository.dart';
+import 'package:student_calendar_app/core/repositories/messaging/messaging_repository.dart';
+import 'package:student_calendar_app/core/services/auth_service.dart';
 
 class ClassesController extends GetxController {
   final classes = <Class>[].obs;
+  final authService = Get.find<AuthService>();
+
   final repo = Get.find<ClassesRepository>();
+  final messagingRepo = Get.find<MessagingRepository>();
   final loading = true.obs;
   final isLoadingMore = false.obs;
   final canFetchMore = true.obs;
+
   int currentPage = 0;
 
   ClassesController() {
@@ -26,7 +32,7 @@ class ClassesController extends GetxController {
 
   fetchClasses() async {
     try {
-      if (canFetchMore.value) {
+      if (canFetchMore.value && authService.user != null ) {
         isLoadingMore.value = true;
         currentPage++;
         final results = await repo.getClasses(page: currentPage);

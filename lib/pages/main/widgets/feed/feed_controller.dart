@@ -4,9 +4,11 @@ import 'package:get/get.dart';
 import 'package:student_calendar_app/core/models/models.dart';
 import 'package:student_calendar_app/core/repositories/feed/feed_repository.dart';
 import 'package:student_calendar_app/core/repositories/feed/feed_section.dart';
+import 'package:student_calendar_app/core/services/auth_service.dart';
 
 class FeedController extends GetxController {
   final feed = <FeedSection>[].obs;
+  final authService = Get.find<AuthService>();
   final repo = Get.find<FeedRepository>();
   final loading = true.obs;
   final isLoadingMore = false.obs;
@@ -26,7 +28,7 @@ class FeedController extends GetxController {
 
   fetchFeed() async {
     try {
-      if (canFetchMore.value) {
+      if (canFetchMore.value && authService.user != null) {
         isLoadingMore.value = true;
         currentPage++;
         final (totalPages, results) = await repo.fetchFeed(page: currentPage);

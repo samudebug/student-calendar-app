@@ -37,7 +37,7 @@ class AuthRepositoryFirebase implements AuthRepository {
     try {
       await instance.createUserWithEmailAndPassword(
           email: email, password: password);
-      await instance.currentUser?.updateDisplayName(name);
+      return await instance.currentUser?.updateDisplayName(name);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'email-already-in-use') {
         Get.snackbar("Error", "This email is already in use");
@@ -47,8 +47,9 @@ class AuthRepositoryFirebase implements AuthRepository {
         Get.snackbar("Error", "Your password is too weak");
       } else {
         Get.snackbar("Error", "An error has ocurred");
-        log(e.toString());
+        
       }
+      rethrow;
     }
   }
 

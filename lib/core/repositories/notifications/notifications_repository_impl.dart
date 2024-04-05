@@ -19,13 +19,19 @@ class NotificationsRepositoryImpl extends GetConnect
     messagingRepo.requestPermission();
     messagingRepo.getToken().then((value) {
       if (value != null) {
-        userRepo.updateUser(
-            fcmToken: value, name: authRepo.currentUser().displayName);
+        final user = authRepo.currentUser();
+        if (user != null) {
+          userRepo.updateUser(
+              fcmToken: value, name: authRepo.currentUser().displayName);
+        }
       }
     });
     messagingRepo.onTokenRefresh.listen((event) {
-      userRepo.updateUser(
-          fcmToken: event, name: authRepo.currentUser().displayName);
+      final user = authRepo.currentUser();
+      if (user != null) {
+        userRepo.updateUser(
+            fcmToken: event, name: authRepo.currentUser().displayName);
+      }
     });
     messagingRepo.onForegroundMessage.listen((RemoteMessage event) {
       Get.snackbar(event.data['title'], event.data['body']);

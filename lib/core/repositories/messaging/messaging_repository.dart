@@ -5,5 +5,6 @@ abstract class MessagingRepository {
   Stream<RemoteMessage> get onForegroundMessage;
   void requestPermission();
   Future<String?> getToken();
+  void subscribeToTopic({required String name});
 
 }

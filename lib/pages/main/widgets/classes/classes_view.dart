@@ -11,7 +11,8 @@ class ClassesView extends StatelessWidget {
     return NotificationListener<ScrollNotification>(
       onNotification: (scrollNotification) {
         if (scrollNotification is ScrollEndNotification &&
-            controller.canFetchMore.value && !controller.isLoadingMore.value) {
+            controller.canFetchMore.value &&
+            !controller.isLoadingMore.value) {
           controller.fetchClasses();
         }
         return true;
@@ -32,6 +33,16 @@ class ClassesView extends StatelessWidget {
                 ),
               ),
             ),
+            if (controller.classes.isEmpty && !controller.loading.value)
+              SliverToBoxAdapter(
+                child: Container(
+                  height: 300,
+                  child: Center(
+                    child: Text(
+                        "No classes. You can create or join a class by tapping the + button on the corner", style: context.theme.textTheme.bodyLarge, textAlign: TextAlign.center,),
+                  ),
+                ),
+              ),
             SliverGrid(
                 delegate: SliverChildBuilderDelegate(
                   (BuildContext context, int index) {

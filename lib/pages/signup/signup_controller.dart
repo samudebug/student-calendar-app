@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:student_calendar_app/core/services/auth_service.dart';
@@ -11,15 +13,17 @@ class SignupController extends GetxController {
 
   final service = Get.find<AuthService>();
 
-  
-
   submit() async {
     if (formKey.currentState?.validate() ?? false) {
-      await service.signUp(
-          name: nameController.text,
-          email: emailController.text,
-          password: passwordController.text);
-      Get.offAllNamed('/');
+      try {
+        await service.signUp(
+            name: nameController.text,
+            email: emailController.text,
+            password: passwordController.text);
+        Get.offAllNamed('/');
+      } catch (e) {
+        log("An error has ocurred", error: e);
+      }
     }
   }
 
@@ -67,5 +71,4 @@ class SignupController extends GetxController {
     }
     return null;
   }
-  
 }

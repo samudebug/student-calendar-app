@@ -22,4 +22,9 @@ class MessagingRepositoryImpl implements MessagingRepository {
     return instance.getToken();
   }
 
+  @override
+  void subscribeToTopic({required String name}) {
+    instance.subscribeToTopic(name);
+  }
+
 }

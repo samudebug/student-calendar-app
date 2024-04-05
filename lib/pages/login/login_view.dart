@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:student_calendar_app/pages/login/login_controller.dart';
 
@@ -65,12 +66,13 @@ class LoginPage extends StatelessWidget {
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 8),
-                  child: ElevatedButton(
+                  child: ElevatedButton.icon(
+                    icon: SvgPicture.asset('assets/google.svg', height: 20,),
                     onPressed: () => controller.loginWithGoogle(),
                     style: ElevatedButton.styleFrom(
                         backgroundColor: Get.theme.colorScheme.tertiary,
                         foregroundColor: Get.theme.colorScheme.onTertiary),
-                    child: const Text("Login With Google"),
+                    label: const Text("Login With Google"),
                   ),
                 ),
                 const Padding(
