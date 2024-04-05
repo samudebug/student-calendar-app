@@ -70,4 +70,10 @@ class ClassesRepositoryImpl extends GetConnect implements ClassesRepository {
     final Class result = Class.fromJson(response.body);
     return result;
   }
+
+  @override
+  Future<void> removeStudent(
+      {required String classId, required String studentId}) async {
+    await delete('/classes/$classId/students/$studentId');
+  }
 }

@@ -1,3 +1,5 @@
+import 'package:student_calendar_app/core/models/student.dart';
+
 class Class {
   String id;
   String name;
@@ -5,6 +7,7 @@ class Class {
   String createdBy;
   DateTime createdAt;
   DateTime updatedAt;
+  List<Student>? students;
 
   Class(
       {required this.id,
@@ -12,7 +15,8 @@ class Class {
       required this.code,
       required this.createdBy,
       required this.createdAt,
-      required this.updatedAt});
+      required this.updatedAt,
+      this.students});
 
   Class.fromJson(Map<String, dynamic> json)
       : id = json['id'],
@@ -20,5 +24,10 @@ class Class {
         code = json['code'],
         createdBy = json['createdBy'],
         createdAt = DateTime.parse(json['createdAt']),
-        updatedAt = DateTime.parse(json['updatedAt']);
+        updatedAt = DateTime.parse(json['updatedAt']),
+        students = json['students'] != null
+            ? (json['students'] as List<dynamic>)
+                .map((e) => Student.fromJson(e))
+                .toList()
+            : null;
 }

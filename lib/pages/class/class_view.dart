@@ -11,11 +11,13 @@ class ClassPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Obx(() => Scaffold(
           appBar: const DefaultAppBar(),
-          floatingActionButton: controller.currentClass.value != null ? FloatingActionButton.extended(
-            onPressed: () => controller.openAdd(),
-            label: Text("Add Task"),
-            icon: Icon(Icons.add),
-          ) : null,
+          floatingActionButton: controller.currentClass.value != null
+              ? FloatingActionButton.extended(
+                  onPressed: () => controller.openAdd(),
+                  label: Text("Add Task"),
+                  icon: Icon(Icons.add),
+                )
+              : null,
           body: controller.currentClass.value == null
               ? const Center(
                   child: CircularProgressIndicator(),
@@ -52,7 +54,7 @@ class ClassPage extends StatelessWidget {
                           height: 50,
                           padding: EdgeInsets.symmetric(vertical: 8),
                           child: TextButton.icon(
-                              onPressed: () {},
+                              onPressed: () => controller.openStudentsView(),
                               icon: Icon(Icons.people),
                               label: Text("View Students")),
                         ),

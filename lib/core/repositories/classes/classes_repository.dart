@@ -5,4 +5,5 @@ abstract class ClassesRepository {
   Future<Class> getClass({required String id});
   Future<Class> createClass({required String name});
   Future<Class> joinClass({required String code});
+  Future<void> removeStudent({required String classId, required String studentId});
 }

@@ -12,6 +12,8 @@ import 'package:student_calendar_app/pages/profile/profile_binding.dart';
 import 'package:student_calendar_app/pages/profile/profile_view.dart';
 import 'package:student_calendar_app/pages/signup/signup_binding.dart';
 import 'package:student_calendar_app/pages/signup/signup_view.dart';
+import 'package:student_calendar_app/pages/students/students_binding.dart';
+import 'package:student_calendar_app/pages/students/students_view.dart';
 import 'package:student_calendar_app/pages/task/task_binding.dart';
 import 'package:student_calendar_app/pages/task/task_view.dart';
 import 'package:student_calendar_app/pages/task_form/task_form_binding.dart';
@@ -65,6 +67,12 @@ class MyApp extends StatelessWidget {
             binding: ClassPageBinding(),
             preventDuplicates: true,
             transition: Transition.cupertino),
+        GetPage(
+            name: '/classes/:classId/students',
+            page: () => StudentsPage(),
+            binding: StudentsBinding(),
+            transition: Transition.downToUp,
+            fullscreenDialog: true),
         GetPage(
             name: '/classes/:classId/tasks/new',
             page: () => TaskForm(),

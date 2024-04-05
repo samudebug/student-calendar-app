@@ -63,4 +63,8 @@ class ClassPageController extends GetxController {
     await Get.toNamed('/classes/${currentClass.value!.id}/tasks/new');
     refresh();
   }
+
+  openStudentsView() {
+    Get.toNamed('/classes/${currentClass.value!.id}/students');
+  }
 }
