@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:student_calendar_app/widgets/join_class/join_class_controller.dart';
 
@@ -23,13 +24,18 @@ class JoinClassDialog extends StatelessWidget {
               ),
             ),
             Padding(
-                padding: const EdgeInsets.symmetric(vertical: 8.0),
-                child: TextFormField(
+              padding: const EdgeInsets.symmetric(vertical: 8.0),
+              child: TextFormField(
                   decoration: const InputDecoration(hintText: "Class Code"),
                   textCapitalization: TextCapitalization.characters,
+                  inputFormatters: [
+                    FilteringTextInputFormatter.allow(RegExp('[A-Z0-9]')),
+                    LengthLimitingTextInputFormatter(5)
+                  ],
                   controller: controller.codeController,
                   validator: controller.validateCode,
-                )),
+                )
+            ),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 8.0),
               child: Obx(() => IgnorePointer(

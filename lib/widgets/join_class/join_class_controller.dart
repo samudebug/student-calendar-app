@@ -1,10 +1,12 @@
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+
 import 'package:student_calendar_app/core/repositories/classes/classes_repository.dart';
 
 class JoinClassDialogController extends GetxController {
   final formKey = GlobalKey<FormState>();
   final codeController = TextEditingController();
+  final code = ''.obs;
   final repo = Get.find<ClassesRepository>();
   final loading = false.obs;
 
@@ -12,7 +14,7 @@ class JoinClassDialogController extends GetxController {
     if ((formKey.currentState?.validate() ?? false)) {
       try {
         loading.value = true;
-        final joinedClass = await repo.joinClass(code: codeController.text);
+        final joinedClass = await repo.joinClass(code: code.value);
         Get.back();
         Get.toNamed('/classes/${joinedClass.id}');
       } catch (e) {
