@@ -1,16 +1,15 @@
-# student_calendar_app
+# Student Calendar
 
-A new Flutter project.
+This is the repo for the mobile app for Student Calendar
+[Check the repo for the backend and webapp here](https://github.com/samudebug/student-calendar)
 
-## Getting Started
+This is an app that allows students to create class calendars and schedule the dates of important tasks, assignments, exams, etc.
 
-This project is a starting point for a Flutter application.
+An user can create or join a class. While being on a class, they can create a task on said class, defining a deliver date and extra notes for that task, like reference materials for example.
 
-A few resources to get you started if this is your first Flutter project:
+### Structure
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+The app is built using [Flutter](https://flutter.dev/) using [GetX](https://pub.dev/packages/get) for route, state and dependency management.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+The app uses a custom built API to store data.
+It uses [Firebase Authentication](https://firebase.google.com/docs/auth) to handle user authentication using Email and Password as well as Google Sign-in.
